@@ -1,5 +1,6 @@
 # Prettier 筆記
 [1.Prettier編輯器安裝擴充套件、只在本地工作區使用](#Prettier編輯器安裝擴充套件、只在本地工作區使用)
+
 [2.團隊使用方式(建議)](#團隊使用方式(建議))
 
 ## Prettier 編輯器安裝擴充套件、只在本地工作區使用
@@ -8,6 +9,8 @@
 - 1. vscode 編輯器，開啟專案
 - 2.  ```ctrl``` + ```shift``` + ```P``` 打開設定
 - 3. 輸入 ```Preferences:Open workspace Settings(JSON)```
+![alt text](./images/image1.png)
+
 - 4. 貼上下列設定 
 ```json
 {
@@ -15,7 +18,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
-自動儲存、確認 editor.defaultFormatter 設為 esbenp.prettier-vscode。
+
+```"editor.formatOnSave": true,```: 自動儲存
+```"editor.defaultFormatter": "esbenp.prettier-vscode"```: 確認 editor.defaultFormatter 設為 esbenp.prettier-vscode。
 
 
 - 5. 回到專案根目錄，建立 ```.prettierrc``` 檔案，內容放你想要的排版設定
@@ -39,3 +44,4 @@
 ## 團隊使用方式(建議)
 
 (待補)
+
