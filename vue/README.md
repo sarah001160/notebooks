@@ -23,3 +23,36 @@ const formattedTest = computed({
 });
 
 ```
+
+
+## 原生JS - 取出物件的 key,value、只取出物件的 value
+
+### Object.entires(物件)，取出 key 與 value
+```js
+// Object.entires(物件)
+const obj = {
+  name:'haha', 
+  num: 20
+}
+
+const b = Object.entries(obj); 
+console.log(b) //[["name", "haha"], ["num", 20]]
+
+// 變成處理陣列
+for (const [key, value] of Object.entries(obj)) {
+  console.log([key,value]) //["name", "haha"] ["num", 20]
+}
+```
+
+
+### 只取出物件的值 value
+```js
+//Object.values(物件)
+
+const obj = {
+  name:'haha', 
+  num: 20
+}
+console.log(Object.values(obj)) // ["haha", 20]
+
+```
