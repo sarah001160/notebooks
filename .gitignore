@@ -1,0 +1,4 @@
+# 註解_忽略根目錄內的 .prettier.json 文件
+/.prettierrc.json
+
+
