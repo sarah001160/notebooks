@@ -49,7 +49,7 @@ test01*
 # ./test01/index.js
 # ./test01/test02/index02.js
 
-# 忽略 test02 資料夾(不分層級-子層的 test02 也會忽略追蹤)
+# 忽略 test02 資料夾(不分層級)
 test02/
 # 下列不加入版控
 # ./test/test01/test02/index02.js
