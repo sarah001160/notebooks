@@ -2,11 +2,41 @@
 
 JS 的操作，多練習(例如:排序、資料比對、移除重複的值..等情境的操作練習)。
 
-## 判斷是否質數
+## 1 判斷是否質數
 
-## 將陣列中重複的質，整理成陣列中沒有重複的質
+```js
+// 質數定義: 一個大於 1 的整數除了1 和本身以外，沒有其他的因數。
+// 1 不是質數也不是合數。 2 是偶數，也是最小的質數。
+// 例：13 只有1 和13 兩個因數，所以13 稱為質數
 
-## 檢查 key 是否存在於物件 {} 中
+function isPrime(n) {
+    if (n == 1) {
+        console.log(false)
+        return
+    }
+
+    let starter = 2
+    while (starter < n) {
+        if (n % starter == 0) {
+            console.log(false)
+            return false
+        }
+        starter++
+    }
+    console.log(true)
+    return true
+}
+
+isPrime(1) //false
+isPrime(19) //true
+isPrime(21) //false
+isPrime(91) //false
+isPrime(111) //false
+```
+
+## 2 將陣列中重複的質，整理成陣列中沒有重複的質
+
+## 3 檢查 key 是否存在於物件 {} 中
 
 ```js
 const obj = { a: 1, c: 3 }
@@ -15,6 +45,41 @@ console.log('a' in obj) // true
 console.log('b' in obj) // false
 console.log('c' in obj) // true
 ```
+
+## 4 印星號
+
+```js
+//印星號
+//4，印出*、**、***、****
+//3，印出*、**、***
+//以此類推
+
+function print(n) {
+    let starter = 0
+    let str = ''
+    while (starter < n) {
+        if (starter < n) {
+            str += '*'
+            console.log(str)
+        }
+        starter++
+    }
+}
+
+print(4)
+//*
+// **
+// ***
+// ****
+
+print(2)
+// *
+// **
+```
+
+## 迴文
+
+========================================================
 
 ## Number() 與 parseFloat()
 
