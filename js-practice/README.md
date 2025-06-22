@@ -171,6 +171,99 @@ function correctAlphaBA(arr) {
 correctAlphaBA(list) // localeCompare [{ id: 1, name: 'cnn' },  { id: 2, name: 'bnn' },  { id: 3, name: 'ann' }]
 ```
 
+彈性寫法，升冪降冪同個 function
+
+```js
+function createSortFn(key, isAsc = true) {
+    return function (a, b) {
+        let valA = a[key]
+        let valB = b[key]
+
+        if (typeof valA === 'string') valA = valA.toLowerCase()
+        if (typeof valB === 'string') valB = valB.toLowerCase()
+
+        if (valA < valB) return isAsc ? -1 : 1
+        if (valA > valB) return isAsc ? 1 : -1
+        return 0
+    }
+}
+
+const list = [
+    { id: 2, name: 'Banana' },
+    { id: 3, name: 'apple' },
+    { id: 1, name: 'banana' },
+]
+
+// 升冪排序
+const sortedAsc = [...list].sort(createSortFn('name', true))
+// 降冪排序
+const sortedDesc = [...list].sort(createSortFn('name', false))
+
+console.log('Ascending:', sortedAsc)
+console.log('Descending:', sortedDesc)
+```
+
+原本的寫法
+
+```js
+const newList = [
+    { id: 300, name: 'CorX' },
+    { id: 100, name: 'Bnn1' },
+    { id: 100, name: 'Bnn2' },
+    { id: 100, name: 'AZZZZzzz' },
+]
+
+//name 小到大
+function Ascending(a, b) {
+    const valA = a.name.toLowerCase()
+    const valB = b.name.toLowerCase()
+    if (valA < valB) {
+        return -1
+    }
+    // 1 代表符合條件的結果 排在 -1 結果後面
+    if (valA > valB) {
+        return 1
+    }
+    // 0表示相同，位置不變
+    return 0
+}
+
+//name 大到小
+function Descending(a, b) {
+    const valA = a.name.toLowerCase()
+    const valB = b.name.toLowerCase()
+
+    if (valA > valB) {
+        return -1
+    }
+
+    if (valA < valB) {
+        return 1
+    }
+    return 0
+}
+
+// Arr.sort(排序邏輯function)
+const r = newList.sort(Ascending)
+console.log('r', r)
+// 回傳
+// r[
+//   ({ id: 100, name: 'AZZZZzzz' },
+//   { id: 100, name: 'Bnn1' },
+//   { id: 100, name: 'Bnn2' },
+//   { id: 300, name: 'CorX' })
+// ];
+
+const r2 = newList.sort(Descending)
+console.log('r2', r2)
+// r2 [
+//   { id: 300, name: 'CorX' },
+//   { id: 100, name: 'Bnn2' },
+//   { id: 100, name: 'Bnn1' },
+//   { id: 100, name: 'AZZZZzzz' })
+// ];
+```
+
 ========================================================
 
 ## Number() 與 parseFloat()
