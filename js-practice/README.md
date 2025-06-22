@@ -79,6 +79,98 @@ print(2)
 
 ## 迴文
 
+## sort 用法
+
+排列 array 內字串、排列 array 內數字、排列 array 內物件
+
+```js
+function sortAB(arr) {
+    const n = arr.sort((a, b) => {
+        return a - b //小到大
+    })
+    console.log(n)
+}
+
+// 回傳數字由小到大
+sortAB([8, 7, 6, 5, 4, 3]) //  [3,4,5,6,7,8] 適用陣列內純數字
+
+// 錯誤，沒有按照id 1、2、3排列，不適用物件排列
+sortAB([
+    { id: 3, name: 'a' },
+    { id: 2, name: 'b' },
+    { id: 1, name: 'c' },
+]) //[ { id: 3, name: 'a' }, { id: 2, name: 'b' }, { id: 1, name: 'c' } ]
+
+// 錯誤，無回傳'a','b','c'
+sortAB(['c', 'b', 'a']) //[ 'c', 'b', 'a' ]
+```
+
+排列 array 內的物件
+
+改變原始陣列
+
+```js
+let list = [
+    { id: 3, name: 'a' },
+    { id: 2, name: 'b' },
+    { id: 1, name: 'c' },
+]
+
+// 改變原始陣列
+function sort2AB(arr) {
+    arr.sort(function (a, b) {
+        // 依據id順序由小到大排列資料，一定要寫return
+        return a.id - b.id
+    })
+    return arr
+}
+
+sort2AB(list)
+console.log('list', list) // 原始陣列被改變了，排序後 [ { id: 1, name: 'c' }, { id: 2, name: 'b' }, { id: 3, name: 'a' } ]
+```
+
+不改變原始陣列
+
+```js
+let list = [
+    { id: 3, name: 'a' },
+    { id: 2, name: 'b' },
+    { id: 1, name: 'c' },
+]
+function sort2AB(arr) {
+    // 不影響原陣列，宣告新變數result
+    const result = arr.sort(function (a, b) {
+        // 依據id順序由小到大排列資料，一定要寫return
+        return a.id - b.id
+    })
+    return result
+}
+const r1 = sort2AB(list)
+
+console.log('原始陣列list不變', list) //[ { id: 3, name: 'a' }, { id: 2, name: 'b' }, { id: 1, name: 'c' } ]
+console.log('r1', r1) // [ { id: 1, name: 'c' }, { id: 2, name: 'b' }, { id: 3, name: 'a' } ]
+```
+
+用字母(字串)排序
+
+```js
+let list = [
+    { id: 3, name: 'ann' },
+    { id: 2, name: 'bnn' },
+    { id: 1, name: 'cnn' },
+]
+
+// 字母排序 .localCompare
+function correctAlphaBA(arr) {
+    const result = arr.sort((a, b) => {
+        return b.name.localeCompare(a.name)
+    })
+    console.log(' localeCompare', result)
+    return result
+}
+correctAlphaBA(list) // localeCompare [{ id: 1, name: 'cnn' },  { id: 2, name: 'bnn' },  { id: 3, name: 'ann' }]
+```
+
 ========================================================
 
 ## Number() 與 parseFloat()
