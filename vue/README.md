@@ -1,25 +1,165 @@
 # Vue
 
+vite 建構專案
+
+```bash
+npm create vite@latest my-vue-app
+```
+
+建立 my-vue-app 資料夾
+終端機會跟你互動，問妳問題，建立哪種框架? 請選擇 Vue
+要不要加上 TypeScript? 先不用
+
+進入專案、安裝 dependencies(依賴)
+
+```bash
+cd my-vue-app
+npm install
+```
+
+啟動伺服器
+
+```bash
+npm run dev
+```
+
+打包檔案，用於發行正式版
+
+```bash
+npm run build
+```
+
+打包後會輸出到/dist 資料夾
+
+## 安裝 vue router、pinia
+
+安裝 vue router
+
+```bash
+npm install vue-router
+```
+
+安裝 pinia
+
+```bash
+npm install pinia
+```
+
+安裝後，到 main.js 做基本設定
+
+```Javascript
+//main.js
+import { createApp } from 'vue'
+import App from './App.vue'
+import { createPinia } from 'pinia'
+import router from './router' // 自己建立 router/index.js
+
+const app = createApp(App);
+app.use(createPinia())
+app.use(router)
+app.mount('#app');
+
+```
+
+建立 `src/router/index.js`
+
+```javascript
+//src/router/index.js
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+
+const routes = [
+    {
+        path: '/',
+        name: Home,
+        component: HomeView,
+    },
+    {
+        path: '/about',
+        name: About,
+        component: () => import('@/views/AboutView.vue'), //(動態載入=懶加載)使用者需要時才載入，減少初次載入時間。
+    },
+    {
+        component: ParentView,
+        //子路由path不能加斜線/，會變成絕對路徑(會跳錯)
+        children: [
+            {
+                path: 'child1',
+                name: 'Child1',
+                component: () => import('@/components/ChildVew1.vue'),
+            },
+            {
+                path: 'child2',
+                name: 'Child2',
+                component: () => import('@/components/ChildVew2.vue'),,
+            },
+        ],
+    },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})
+
+export default router
+```
+
+### 建立 pinia (所有元件共享資料狀態) 的設定，建立 src/stores/couter.js (必須在 src 資料夾 stores 資料夾)
+
+#### 使用 state、actions 的寫法
+
+```javascript
+//使用 state、actions的寫法
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+    state: () => ({
+        count: 0,
+    }),
+    actions: {
+        increment() {
+            this.count++
+        },
+    },
+})
+```
+
+#### 不使用 state、actions，但要匯出才能使用的 pinia
+
+```javascript
+//這邊有安裝autoImport套件情況下，不須再寫import { ref } from 'vue'
+import { defineStore } from 'pinia'
+export const useUserStore = defineStore('user', () => {
+    const userEmail = ref('')
+
+    return {
+        userEmail,
+    }
+})
+```
+
 ## computed 的 get 與 set
 
 get 取回值，set 將值作處理修改吐出去
 
 ```js
 const formattedTest = computed({
-  // getter（取得 formattedTest 的值時）
-  get() {
-    return modalContent.value?.join('\n') || '';
-  },
+    // getter（取得 formattedTest 的值時）
+    get() {
+        return modalContent.value?.join('\n') || ''
+    },
 
-  // setter（修改 formattedTest 的值時）
-  set(newValue) {
-    newValue = DOMPurify.sanitize(newValue);
-    modalContent.value = newValue
-      .split('\n') // 把字串用換行切開變陣列
-      .map((item) => item.trim()) // 每一行去頭尾空白
-      .filter((line) => line !== ''); // 移除空行
-  },
-});
+    // setter（修改 formattedTest 的值時）
+    set(newValue) {
+        newValue = DOMPurify.sanitize(newValue)
+        modalContent.value = newValue
+            .split('\n') // 把字串用換行切開變陣列
+            .map((item) => item.trim()) // 每一行去頭尾空白
+            .filter((line) => line !== '') // 移除空行
+    },
+})
 ```
 
 ## 原生 JS - 取出物件的 key,value、只取出物件的 value
@@ -29,16 +169,16 @@ const formattedTest = computed({
 ```js
 // Object.entires(物件)
 const obj = {
-  name: 'haha',
-  num: 20,
-};
+    name: 'haha',
+    num: 20,
+}
 
-const b = Object.entries(obj);
-console.log(b); //[["name", "haha"], ["num", 20]]
+const b = Object.entries(obj)
+console.log(b) //[["name", "haha"], ["num", 20]]
 
 // 變成處理陣列
 for (const [key, value] of Object.entries(obj)) {
-  console.log([key, value]); //["name", "haha"] ["num", 20]
+    console.log([key, value]) //["name", "haha"] ["num", 20]
 }
 ```
 
@@ -48,10 +188,10 @@ for (const [key, value] of Object.entries(obj)) {
 //Object.values(物件)
 
 const obj = {
-  name: 'haha',
-  num: 20,
-};
-console.log(Object.values(obj)); // ["haha", 20]
+    name: 'haha',
+    num: 20,
+}
+console.log(Object.values(obj)) // ["haha", 20]
 ```
 
 #### 借放一下筆記與程式碼
