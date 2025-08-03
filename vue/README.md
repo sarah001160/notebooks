@@ -275,3 +275,82 @@ main
   padding: 1rem
 </style>
 ```
+
+## 安裝 SASS
+
+```bash
+npm install -D sass
+```
+
+`-D` 等同 `--save-dev`把他加到開發階段用的相依套件 devDependencies
+
+只在「開發或編譯」階段需要這個套件
+
+最後打包給用戶的時候，不會把 sass 包進去（因為使用者不需要它）
+
+## AutoImport 套件 自動引入 Vue unplugin-auto-import
+
+npm 文章: https://www.npmjs.com/package/unplugin-auto-import/v/0.17.1
+
+### 安裝
+
+`npm i unplugin-auto-import`
+
+### 使用前 unplugin-auto-import 前
+
+```bash
+import { computed, ref } from 'vue'
+
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+```
+
+### 使用後 unplugin-auto-import
+
+```bash
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+```
+
+### vite.config.js 設置檔
+
+```js
+//vite.config.js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+
+export default defineConfig({
+    plugins: [
+        vue(),
+        AutoImport({
+            imports: ['vue'],
+            dts: 'src/auto-imports.d.ts', // 自動生成的型別定義檔，建議保留
+        }),
+    ],
+})
+```
+
+自動生成的型別定義檔，建議保留，
+
+你即使用 .js 或 .vue 檔案，這個 .d.ts 也能幫 VS Code 做提示。
+
+不會影響專案執行，它只是用來提升 開發體驗。
+✅ 1. 自動補全 Vue API
+不需要 import { ref } from 'vue'，只要打：
+
+```js
+const count = ref(0)
+你會自動看到提示：
+
+ref<T>(value: T): Ref<T>
+
+reactive<T extends object>(target: T): UnwrapNestedRefs<T>
+
+computed(() => ...)
+```
+
+👉 VS Code 會告訴你這些函數的用途、型別與參數。
+
+✅ 2. 錯誤提示更明確
+如果你打錯函數名稱（例如 reff），會立即出現紅線錯誤。

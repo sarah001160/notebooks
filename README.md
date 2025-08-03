@@ -11,4 +11,4 @@
 -   [WSL](./WSL/README.md)
 -   [偵測 token 失效方式-找資料中](./detectInvalidToken/README.md)
 -   [vscode 擴充工具推薦](./vscode擴充工具/README.md)
--   [sweetalert]
+-   [sweetalert](./sweetalert2/readme.md)
