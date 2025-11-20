@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神秘塔羅 - 探索你的命運</title>
+  <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <header>
+      <h1>✨ 神秘塔羅 ✨</h1>
+      <p class="subtitle">探索內心深處的智慧與指引</p>
+    </header>
+
+    <div class="question-section">
+      <h2>🔮 請在心中默想你的問題</h2>
+      <input type="text" id="question" placeholder="輸入你想問的問題（選填）...">
+      <div style="text-align: center;">
+        <button id="startBtn" onclick="startReading()">開始占卜</button>
+      </div>
+    </div>
+
+    <div id="deckSection" class="hidden">
+      <p class="instructions">請選擇三張牌（代表過去、現在與未來）</p>
+      <div class="card-deck" id="cardDeck"></div>
+    </div>
+
+    <div id="resultSection" class="hidden">
+      <div class="selected-cards" id="selectedCards"></div>
+      <div class="interpretation" id="interpretation"></div>
+      <div style="text-align: center; margin-top: 30px;">
+        <button onclick="reset()">重新占卜</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
