@@ -134,3 +134,124 @@ SELECT \* From member_2025;
 -- 查詢資料（SELECT）
 -- 刪除資料（DELETE）
 ```
+
+# 忘記 MySQL 資料庫密碼
+
+【Windows 重設 MySQL 密碼完整流程】
+STEP 1：停止 MySQL 服務
+方法 A：使用服務管理器（最簡單）
+
+按 Win → 搜尋 Services
+
+打開「服務」
+
+找 MySQL 或 MySQL80（版本不同名字會不同）
+
+右鍵 → 停止（Stop）
+
+方法 B：XAMPP 使用者
+
+如果你是用 XAMPP，開 XAMPP 控制台 → 停止 MySQL。
+
+🟦 STEP 2：以「跳過密碼」模式啟動 MySQL
+
+這一步很重要：跳密碼啟動後，你能直接登入 MySQL，不需要密碼。
+
+方式：
+
+開啟命令提示字元（CMD）
+
+輸入下面指令：
+
+mysqld --skip-grant-tables
+
+如果顯示找不到，代表你沒加入環境變數，那你要找到 MySQL 的 bin 路徑，例如：
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+進去後再執行：
+
+cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+mysqld --skip-grant-tables
+
+⚠ 此視窗不要關掉
+⚠ 保持跑著
+
+🟦 STEP 3：開新一個 CMD 視窗，登入 MySQL
+
+開啟第二個 CMD（第一個不要關）
+
+STEP 2：以「跳過密碼」模式啟動 MySQL
+
+這一步很重要：跳密碼啟動後，你能直接登入 MySQL，不需要密碼。
+
+方式：
+
+開啟命令提示字元（CMD）
+
+輸入下面指令：
+
+mysqld --skip-grant-tables
+
+如果顯示找不到，代表你沒加入環境變數，那你要找到 MySQL 的 bin 路徑，例如：
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+進去後再執行：
+
+cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+mysqld --skip-grant-tables
+
+⚠ 此視窗不要關掉
+⚠ 保持跑著
+
+🟦 STEP 3：開新一個 CMD 視窗，登入 MySQL
+
+開啟第二個 CMD（第一個不要關）
+
+輸入：
+
+mysql -u root
+
+你會成功進入 MySQL（不需要密碼）
+
+如果顯示找不到 mysql，你要先：
+
+cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+再登入：
+
+mysql -u root
+
+🟦 STEP 4：重設 root 密碼
+
+進入 MySQL 後依序輸入：
+
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '你想要的新密碼';
+
+例如：
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass123!';
+
+顯示 OK 代表成功。
+
+🟦 STEP 5：全部關掉並重新啟動 MySQL
+
+關閉那個 mysqld --skip-grant-tables 的視窗（按 X）
+
+回到 Windows Services
+
+找 MySQL → 「啟動（Start）」
+
+🟢 STEP 6：測試新密碼
+
+開 CMD 輸入：
+
+mysql -u root -p
+
+輸入剛剛設定的新密碼 → 能進去就成功！
+
+🎉 完成！
+
+現在你的 MySQL 密碼已經成功重置。
