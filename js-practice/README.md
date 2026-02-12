@@ -358,3 +358,31 @@ isOrder({
 })
 //false -600<-500
 ```
+
+## 排序 數字由大到小
+
+```js
+const arr = [1, 3, 4, 5, 9, 2, 3, 4]
+
+function sort(list) {
+    const result = arr.sort((a, b) => {
+        return b - a //大到小
+    })
+    console.log(result) // [9, 5, 4, 4,3, 3, 2, 1]
+
+    // 移除重複的值
+    const only = new Set(result) // Set(6) { 9, 5, 4, 3, 2, 1 }
+    const newArr = [...only] // [ 9, 5, 4, 3, 2, 1 ]
+}
+
+const n = sort(arr)
+```
+
+### 移除重複的，取出唯一
+
+ES6 寫法 `new Set ()`
+
+```js
+const unique = new Set(list) //
+const uniqueArray = [...unique] //
+```
