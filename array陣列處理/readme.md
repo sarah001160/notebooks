@@ -48,3 +48,13 @@ const array = []
 ```javascript
 list.forEach((item) => console.log(item))
 ```
+
+## reduce
+
+可以放4個參數
+arr.reduce((acc, item, index, array) => {
+// acc → 累積值
+// item → 當前元素
+// index → 當前索引
+// array → 原始陣列本身
+}, 初始值)
