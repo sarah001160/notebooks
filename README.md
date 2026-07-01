@@ -18,6 +18,7 @@
 - [fetch](./fetch/readme.md)
 - [MySQL](./MySQLreadme.md)
 - [firebase]
+- [call API-ajax,axios,fetch]
 
 ## 未整理
 
